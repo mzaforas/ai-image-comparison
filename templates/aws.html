@@ -1,0 +1,73 @@
+<h2>AWS</h2>
+
+<h3>Detect labels</h3>
+<ul class="list-group">
+    {% for label in results.aws.detect_labels.Labels %}
+    <li class="list-group-item">
+        <span class="badge">{{ label.Confidence|round(2) }}</span>
+        {{ label.Name }}
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>Detect faces</h3>
+{% for face in results.aws.detect_faces %}
+<div>
+    <img class="img-thumbnail" src="static/images/{{ face.img }}" alt="analyzed image">
+</div>
+
+<ul class="list-group">
+
+    <li class="list-group-item">
+        <span class="badge">{{ face.Confidence|round(4) }}</span>
+        Looks like a face
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.Gender.Confidence|round(2) }}</span>
+        Appears to be {{ face.Gender.Value|lower }}
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.AgeRange.Low }} - {{ face.AgeRange.High }} years old</span>
+        Age range
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.Smile.Value == "True" %}{{ face.Smile.Confidence|round(2) }}{% else %}{{ (100-face.Smile.Confidence)|round(2) }}{% endif %}</span>
+        Smiling
+    </li>
+    <li class="list-group-item">
+        {% for emotion in face.Emotions %}
+        <span class="badge">{{ emotion.Type }} ({{ emotion.Confidence|round(2)}})</span>
+        {% endfor %}
+        Emotions
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.Eyeglasses.Value == "True" %}{{ face.Eyeglasses.Confidence|round(2) }}{% else %}{{ (100-face.Eyeglasses.Confidence)|round(2) }}{% endif %}</span>
+        Eyeglasses
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.Sunglasses.Value == "True" %}{{ face.Sunglasses.Confidence|round(2) }}{% else %}{{ (100-face.Sunglasses.Confidence)|round(2) }}{% endif %}</span>
+        Sunglasses
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.EyesOpen.Value == "True" %}{{ face.EyesOpen.Confidence|round(2) }}{% else %}{{ (100-face.EyesOpen.Confidence)|round(2) }}{% endif %}</span>
+        EyesOpen
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.Beard.Value == "True" %}{{ face.Beard.Confidence|round(2) }}{% else %}{{ (100-face.Beard.Confidence)|round(2) }}{% endif %}</span>
+        Beard
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.Mustache.Value == "True" %}{{ face.Mustache.Confidence|round(2) }}{% else %}{{ (100-face.Mustache.Confidence)|round(2) }}{% endif %}</span>
+        Mustache
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{% if face.MouthOpen.Value == "True" %}{{ face.MouthOpen.Confidence|round(2) }}{% else %}{{ (100-face.MouthOpen.Confidence)|round(2) }}{% endif %}</span>
+        MouthOpen
+    </li>
+</ul>
+<hr>
+{% endfor %}
+
+<h3>Raw</h3>
+<p id="aws_raw" style="display: none">{{ results.aws }}</p>
+<p><a class="btn btn-default" href="#" role="button" onclick="$('#aws_raw').show();return false;">View details »</a></p>

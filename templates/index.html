@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image recognition</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Image recognition battle</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <form action="/" method="post" enctype="multipart/form-data" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input name="file" type="file" multiple class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Subir" class="btn btn-success">
+                </div>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Image recognition battle</h1>
+        <p>Who will win the AI war?</p>
+        {% if filename %}
+        <img class="featurette-image img-responsive center-block" src="static/images/{{ filename }}" alt="image" style="height: 200px" data-holder-rendered="true">
+        {% endif %}
+    </div>
+</div>
+
+{% if results %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {% include 'aws.html' %}
+        </div>
+        <div class="col-md-4">
+            {% include 'gcp.html' %}
+        </div>
+        <div class="col-md-4">
+            {% include 'azure.html' %}
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2017 Paradigma Digital.</p>
+    </footer>
+</div>
+
+{% endif %}
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>

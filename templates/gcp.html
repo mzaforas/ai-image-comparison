@@ -1,0 +1,62 @@
+<h2>GCP</h2>
+
+<h3>Detect labels</h3>
+<ul class="list-group">
+    {% for label, confidence in results.gcp.detect_labels.items() %}
+    <li class="list-group-item">
+        <span class="badge">{{ confidence|round(2) }}</span>
+        {{ label }}
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>Detect faces</h3>
+
+{% for face in results.gcp.detect_faces %}
+<div>
+    <img class="img-thumbnail" src="static/images/{{ face.img }}" alt="analyzed image">
+</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <span class="badge">{{ face.detection_confidence|round(2) }}</span>
+        Detection confidence
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.landmarking_confidence|round(2) }}</span>
+        Landmarking confidence
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.joy }}</span>
+        Joy
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.sorrow }}</span>
+        Sorrow
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.anger }}</span>
+        Anger
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.surprise }}</span>
+        Surprise
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.under_exposed }}</span>
+        Exposed
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.blurred }}</span>
+        Blurred
+    </li>
+        <li class="list-group-item">
+        <span class="badge">{{ face.headwear }}</span>
+        Headwear
+    </li>
+</ul>
+<hr>
+{% endfor %}
+
+<h3>Raw</h3>
+<p id="gcp_raw" style="display: none">{{ results.gcp }}</p>
+<p><a class="btn btn-default" href="#" role="button" onclick="$('#gcp_raw').show();return false;">View details »</a></p>
