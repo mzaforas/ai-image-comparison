@@ -1,4 +1,68 @@
 <h2>Azure</h2>
-<!--<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">-->
-<p>{{ results.azure }}</p>
-<p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+
+<h3>Labels</h3>
+<ul class="list-group" style="min-height: 450px">
+    {% for label in results.labels %}
+    <li class="list-group-item">
+        <span class="badge">{{ label.confidence|round(2) }}</span>
+        {{ label.name }}
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>Faces</h3>
+
+{% for face in results.faces %}
+<div>
+    <img class="img-thumbnail" src="static/images/{{ face.img }}" alt="analyzed image">
+</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.gender }}</span>
+        Gender
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.glasses }}</span>
+        Glasses
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.age }}</span>
+        Age
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.facialHair.beard }}</span>
+        Bear
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.facialHair.sideburns }}</span>
+        Sideburns
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.facialHair.moustache }}</span>
+        Moustache
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.smile }}</span>
+        Smile
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.makeup.eyeMakeup }}</span>
+        Eye makeup
+    </li>
+    <li class="list-group-item">
+        <span class="badge">{{ face.faceAttributes.makeup.lipMakeup }}</span>
+        Lip makeup
+    </li>
+    <li class="list-group-item">
+        {% for emotion, confidence in face.faceAttributes.emotion.items() %}
+            <span class="badge">{{ emotion }} ({{ confidence }})</span>
+        {% endfor %}
+        Emotions
+    </li>
+</ul>
+<hr>
+{% endfor %}
+
+<h3>Raw</h3>
+<p id="azure_raw" style="display: none">{{ results }}</p>
+<p><a class="btn btn-default" href="#" role="button" onclick="$('#azure_raw').show();return false;">View details »</a></p>

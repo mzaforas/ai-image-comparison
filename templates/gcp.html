@@ -1,8 +1,8 @@
 <h2>GCP</h2>
 
-<h3>Detect labels</h3>
-<ul class="list-group">
-    {% for label, confidence in results.gcp.detect_labels.items() %}
+<h3>Labels</h3>
+<ul class="list-group" style="min-height: 450px">
+    {% for label, confidence in results.labels.items() %}
     <li class="list-group-item">
         <span class="badge">{{ confidence|round(2) }}</span>
         {{ label }}
@@ -10,9 +10,9 @@
     {% endfor %}
 </ul>
 
-<h3>Detect faces</h3>
+<h3>Faces</h3>
 
-{% for face in results.gcp.detect_faces %}
+{% for face in results.faces %}
 <div>
     <img class="img-thumbnail" src="static/images/{{ face.img }}" alt="analyzed image">
 </div>
@@ -58,5 +58,5 @@
 {% endfor %}
 
 <h3>Raw</h3>
-<p id="gcp_raw" style="display: none">{{ results.gcp }}</p>
+<p id="gcp_raw" style="display: none">{{ results }}</p>
 <p><a class="btn btn-default" href="#" role="button" onclick="$('#gcp_raw').show();return false;">View details »</a></p>

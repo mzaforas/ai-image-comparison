@@ -29,8 +29,8 @@ def analyze_image_gcp(image_path, image_file, image_content):
                        'img': highlight_faces(image_path, image_file, face, face_id)}
                       for face_id, face in enumerate(faces, start=1)]
 
-    results = {'detect_labels': labels,
-               'detect_faces': faces_features}
+    results = {'labels': labels,
+               'faces': faces_features}
 
     return results
 

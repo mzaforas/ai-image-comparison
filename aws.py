@@ -11,8 +11,8 @@ def analyze_image_aws(image_path, image_file, image_content):
     for face_id, face in enumerate(faces, start=1):
         face['img'] = highlight_faces(image_path, image_file, face, face_id)
 
-    results = {'detect_labels': client.detect_labels(Image={'Bytes': image_content}, MaxLabels=10),
-               'detect_faces': faces}
+    results = {'labels': client.detect_labels(Image={'Bytes': image_content}, MaxLabels=10),
+               'faces': faces}
     return results
 
 

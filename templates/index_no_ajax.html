@@ -25,7 +25,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
-            <form action="/" method="post" enctype="multipart/form-data" class="navbar-form navbar-right">
+            <form action="/noajax" method="post" enctype="multipart/form-data" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input name="file" type="file" multiple class="form-control">
                 </div>
@@ -52,13 +52,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            {% include 'aws.html' %}
+            {% with results=results.aws %}
+                {% include 'aws.html' %}
+            {% endwith %}
         </div>
         <div class="col-md-4">
-            {% include 'gcp.html' %}
+            {% with results=results.gcp %}
+                {% include 'gcp.html' %}
+            {% endwith %}
         </div>
         <div class="col-md-4">
-            {% include 'azure.html' %}
+            {% with results=results.azure %}
+                {% include 'azure.html' %}
+            {% endwith %}
         </div>
     </div>
 
