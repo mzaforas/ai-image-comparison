@@ -31,8 +31,8 @@
         Age range
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.Smile.Value == "True" %}{{ face.Smile.Confidence|round(2) }}{% else %}{{ (100-face.Smile.Confidence)|round(2) }}{% endif %}</span>
-        Smiling
+        <span class="badge">{% if face.Smile.Value == True %}{{ face.Smile.Confidence|round(2) }}{% else %}{{ (100-face.Smile.Confidence)|round(2) }}{% endif %}</span>
+        Smile
     </li>
     <li class="list-group-item">
         {% for emotion in face.Emotions %}
@@ -41,27 +41,27 @@
         Emotions
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.Eyeglasses.Value == "True" %}{{ face.Eyeglasses.Confidence|round(2) }}{% else %}{{ (100-face.Eyeglasses.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.Eyeglasses.Value == True %}{{ face.Eyeglasses.Confidence|round(2) }}{% else %}{{ (100-face.Eyeglasses.Confidence)|round(2) }}{% endif %}</span>
         Eyeglasses
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.Sunglasses.Value == "True" %}{{ face.Sunglasses.Confidence|round(2) }}{% else %}{{ (100-face.Sunglasses.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.Sunglasses.Value == True %}{{ face.Sunglasses.Confidence|round(2) }}{% else %}{{ (100-face.Sunglasses.Confidence)|round(2) }}{% endif %}</span>
         Sunglasses
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.EyesOpen.Value == "True" %}{{ face.EyesOpen.Confidence|round(2) }}{% else %}{{ (100-face.EyesOpen.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.EyesOpen.Value == True %}{{ face.EyesOpen.Confidence|round(2) }}{% else %}{{ (100-face.EyesOpen.Confidence)|round(2) }}{% endif %}</span>
         EyesOpen
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.Beard.Value == "True" %}{{ face.Beard.Confidence|round(2) }}{% else %}{{ (100-face.Beard.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.Beard.Value == True %}{{ face.Beard.Confidence|round(2) }}{% else %}{{ (100-face.Beard.Confidence)|round(2) }}{% endif %}</span>
         Beard
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.Mustache.Value == "True" %}{{ face.Mustache.Confidence|round(2) }}{% else %}{{ (100-face.Mustache.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.Mustache.Value == True %}{{ face.Mustache.Confidence|round(2) }}{% else %}{{ (100-face.Mustache.Confidence)|round(2) }}{% endif %}</span>
         Mustache
     </li>
     <li class="list-group-item">
-        <span class="badge">{% if face.MouthOpen.Value == "True" %}{{ face.MouthOpen.Confidence|round(2) }}{% else %}{{ (100-face.MouthOpen.Confidence)|round(2) }}{% endif %}</span>
+        <span class="badge">{% if face.MouthOpen.Value == True %}{{ face.MouthOpen.Confidence|round(2) }}{% else %}{{ (100-face.MouthOpen.Confidence)|round(2) }}{% endif %}</span>
         MouthOpen
     </li>
 </ul>
