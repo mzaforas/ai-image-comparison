@@ -6,12 +6,16 @@ from google.cloud import vision
 
 
 def analyze_image_gcp(image_path, image_file, image_content):
+    # Get GCP client
     client = vision.Client()
     image = client.image(content=image_content)
 
-    labels = {label.description: label.score for label in image.detect_labels()}
-    labels = OrderedDict(sorted(labels.items(), key=lambda t: t[1], reverse=True))
+    # Call GCP to detect labels
+    raw_labels = image.detect_labels()
+    dict_labels = {label.description: label.score for label in raw_labels}
+    ordered_labels = OrderedDict(sorted(dict_labels.items(), key=lambda t: t[1], reverse=True))
 
+    # Call GCP to detect faces and transform to convenient dictionary
     faces = image.detect_faces()
 
     faces_features = [{'roll_angle': face.angles.roll,
@@ -29,8 +33,7 @@ def analyze_image_gcp(image_path, image_file, image_content):
                        'img': highlight_faces(image_path, image_file, face, face_id)}
                       for face_id, face in enumerate(faces, start=1)]
 
-    results = {'labels': labels,
-               'faces': faces_features}
+    results = {'labels': ordered_labels, 'faces': faces_features}
 
     return results
 

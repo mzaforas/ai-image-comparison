@@ -5,14 +5,20 @@ import boto3
 
 
 def analyze_image_aws(image_path, image_file, image_content):
+    # Get AWS client
     client = boto3.client('rekognition')
 
+    # Call AWS to detect labels
+    labels = client.detect_labels(Image={'Bytes': image_content}, MaxLabels=10)
+
+    # Call AWS to detect faces
     faces = client.detect_faces(Image={'Bytes': image_content}, Attributes=['ALL']).get('FaceDetails')
+
     for face_id, face in enumerate(faces, start=1):
         face['img'] = highlight_faces(image_path, image_file, face, face_id)
 
-    results = {'labels': client.detect_labels(Image={'Bytes': image_content}, MaxLabels=10),
-               'faces': faces}
+    results = {'labels': labels, 'faces': faces}
+
     return results
 
 
