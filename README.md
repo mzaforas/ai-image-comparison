@@ -5,5 +5,6 @@ AI cloud platforms recognition image comparison:
 * GCP Cloud Vision
 * Azure Cognitive
 
-Start Flask app:
-`$ python3 comparison.py`
+Start Flask app: `$ python3 battle.py`
+
+or using gunicorn with 4 workers: `$ gunicorn -w 4 battle:app`
