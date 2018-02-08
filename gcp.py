@@ -3,28 +3,21 @@ from collections import OrderedDict
 
 from PIL import Image, ImageDraw
 from google.cloud import vision
-from google.cloud.vision import types, enums
+from google.cloud.vision import types
 
 
 def analyze_image_gcp(image_path, image_file, image_content):
     # Get GCP client
-    # client = vision.ImageAnnotatorClient(project='bigdata-154709')
     client = vision.ImageAnnotatorClient()
     image = types.Image(content=image_content)
 
     # Performs label detection on the image file
     response = client.label_detection(image=image)
     raw_labels = response.label_annotations
-
-    # image = client.image(content=image_content)
-
-    # Call GCP to detect labels
-    # raw_labels = image.detect_labels()
     dict_labels = {label.description: label.score for label in raw_labels}
     ordered_labels = OrderedDict(sorted(dict_labels.items(), key=lambda t: t[1], reverse=True))
 
     # Call GCP to detect faces and transform to convenient dictionary
-    # faces = image.detect_faces()
     faces = client.face_detection(image=image)
     likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
                        'LIKELY', 'VERY_LIKELY')
